@@ -1,5 +1,6 @@
 puts 'Cleaning database...'
 Restaurant.destroy_all
+Review.destroy_all
 
 puts 'Creating restaurants...'
 restaurants_attributes = [
@@ -7,23 +8,20 @@ restaurants_attributes = [
     name:         'La Belle Belgique',
     address:      '1 rue du Manneken Peas, 33000 Bordeaux',
     category:     'Belgian',
+    reviews_attributes: [
+      {content: 'youpi c\'était trop cool', rating: 4}
+    ]
   },
 
   {
     name:         'Pizza East',
     address:      '1 rue Alonzo, 33000 Bordeaux',
     category:     'italian',
+    reviews_attributes: [
+      {content: 'Y\'avait des champis mais je crois que c\était pas les bons, wesh', rating: 4}
+    ]
   }
-]
-
-restaurants_attributes.each do |attribute|
-  Restaurant.create(attribute)
-end
 
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+Restaurant.create!(restaurants_attributes)
+puts 'Finished!'
